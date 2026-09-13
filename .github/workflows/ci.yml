@@ -1,0 +1,59 @@
+name: OrangeHRM Automation Suite
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  ui-automation:
+    name: UI Automation (Playwright)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: playwright-automation
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - name: Upload Playwright HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-html-report
+          path: playwright-automation/playwright-report/
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: playwright-automation/allure-results/
+
+  api-automation:
+    name: API Automation (Newman)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api-automation
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install -g newman newman-reporter-htmlextra
+      - run: |
+          newman run JSONPlaceholder-Users-API.postman_collection.json \
+            -r cli,htmlextra \
+            --reporter-htmlextra-export ./newman-report/report.html
+      - name: Upload Newman HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: newman-html-report
+          path: api-automation/newman-report/

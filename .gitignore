@@ -1,0 +1,9 @@
+node_modules/
+playwright-automation/playwright-report/
+playwright-automation/allure-results/
+playwright-automation/allure-report/
+playwright-automation/test-results/
+playwright-automation/dist/
+api-automation/newman-report/
+.env
+.DS_Store

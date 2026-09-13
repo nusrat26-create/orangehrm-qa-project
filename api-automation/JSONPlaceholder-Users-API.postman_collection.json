@@ -1,0 +1,158 @@
+{
+  "info": {
+    "_postman_id": "b7e6c8b0-1a2d-4c3e-9f5a-jsonplaceholder-users",
+    "name": "JSONPlaceholder Users API - Automation Suite",
+    "description": "Part D API Automation: GET all users, extract an id, build /users/{id}, then PUT dynamic updates. Every request validates its status code. Runnable via Newman as a standalone suite.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1 - GET all users",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Response contains user data (non-empty array)', function () {",
+              "    const users = pm.response.json();",
+              "    pm.expect(users).to.be.an('array');",
+              "    pm.expect(users.length).to.be.greaterThan(0);",
+              "});",
+              "",
+              "pm.test('Each user object includes id, name, and email', function () {",
+              "    const users = pm.response.json();",
+              "    users.forEach(function (user) {",
+              "        pm.expect(user).to.have.property('id');",
+              "        pm.expect(user).to.have.property('name');",
+              "        pm.expect(user).to.have.property('email');",
+              "    });",
+              "});",
+              "",
+              "// Step 2: extract one user's id and store it as a collection variable",
+              "// so later requests (including a separate Newman process/run) can reuse it.",
+              "const users = pm.response.json();",
+              "const chosenUser = users[0];",
+              "pm.collectionVariables.set('storedUserId', chosenUser.id);",
+              "pm.collectionVariables.set('storedUserName', chosenUser.name);",
+              "console.log('Stored user id for next requests:', chosenUser.id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/users",
+          "host": ["{{baseUrl}}"],
+          "path": ["users"]
+        },
+        "description": "Fetch all users and validate the shape of the response."
+      },
+      "response": []
+    },
+    {
+      "name": "2 - PUT update user by stored id",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// Step 3: build the /users/{id} endpoint using the id stored from Step 1/2.",
+              "const storedUserId = pm.collectionVariables.get('storedUserId');",
+              "if (!storedUserId) {",
+              "    throw new Error('storedUserId is not set. Run \"1 - GET all users\" first (or the whole collection in order) so an id is captured before this request runs.');",
+              "}",
+              "",
+              "// Dynamically generated values for this run",
+              "const timestamp = Date.now();",
+              "pm.collectionVariables.set('dynamicName', 'QA Tester ' + timestamp);",
+              "pm.collectionVariables.set('dynamicEmail', 'qa.tester.' + timestamp + '@example.com');",
+              "pm.collectionVariables.set('dynamicCompanyName', 'Automation Co ' + timestamp);"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const body = pm.response.json();",
+              "const storedUserId = parseInt(pm.collectionVariables.get('storedUserId'), 10);",
+              "",
+              "pm.test('Returned id matches the stored variable', function () {",
+              "    pm.expect(body.id).to.eql(storedUserId);",
+              "});",
+              "",
+              "pm.test('phone field is not empty', function () {",
+              "    pm.expect(body.phone).to.exist;",
+              "    pm.expect(body.phone.toString().trim().length).to.be.greaterThan(0);",
+              "});",
+              "",
+              "pm.test('Updated fields were sent as dynamically generated values', function () {",
+              "    pm.expect(body.name).to.eql(pm.collectionVariables.get('dynamicName'));",
+              "    pm.expect(body.email).to.eql(pm.collectionVariables.get('dynamicEmail'));",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": {{storedUserId}},\n  \"name\": \"{{dynamicName}}\",\n  \"email\": \"{{dynamicEmail}}\",\n  \"company\": {\n    \"name\": \"{{dynamicCompanyName}}\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/{{storedUserId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{storedUserId}}"]
+        },
+        "description": "Update only name, email, and company.name for the stored user id using dynamically generated values. NOTE: JSONPlaceholder is a fake/mock API - it echoes back the request body plus the original record's other fields (including phone), it does not persist changes."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://jsonplaceholder.typicode.com"
+    },
+    {
+      "key": "storedUserId",
+      "value": ""
+    },
+    {
+      "key": "storedUserName",
+      "value": ""
+    },
+    {
+      "key": "dynamicName",
+      "value": ""
+    },
+    {
+      "key": "dynamicEmail",
+      "value": ""
+    },
+    {
+      "key": "dynamicCompanyName",
+      "value": ""
+    }
+  ]
+}
