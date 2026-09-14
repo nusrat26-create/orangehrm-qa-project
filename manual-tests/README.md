@@ -16,3 +16,5 @@
 3. **Bug Reports** — bug report format (Bug ID, Title, Module, Steps to Reproduce,
    Expected Result, Actual Result, Severity, Priority, Status, Screenshot).
 
+Screenshot:
+For login-
