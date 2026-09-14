@@ -1,6 +1,6 @@
 # JSONPlaceholder Users API Automation (Postman + Newman)
 
-Automates Part D against `https://jsonplaceholder.typicode.com/users`.
+Automates Part D for `https://jsonplaceholder.typicode.com/users`.
 
 | Request | Step(s) covered |
 |---|---|
