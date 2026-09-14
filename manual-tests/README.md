@@ -4,7 +4,7 @@
 
 ## Sheets
 
-1. **Test Cases** — 13 manual test cases (minimum required: 10) across all four modules
+1. **Test Cases** — 11 manual test cases (minimum required: 10) across all four modules
    (Login, PIM, Admin, Leave). Columns: Test ID, Module, Title, Preconditions, Steps,
    Expected Result, Actual Result, Status, Priority, Severity, Requirement/Feature
    Traced. Mix of positive, negative, boundary/edge cases that **complement** — not
