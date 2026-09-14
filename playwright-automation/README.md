@@ -14,8 +14,6 @@ Automates the four Part A scenarios against the OrangeHRM demo site:
 
 - **Playwright Test** (`@playwright/test`) + **TypeScript**
 - **Page Object Model** — one class per page in `pages/`
-- **@faker-js/faker** for randomly generated test data
-- **allure-playwright** for Allure reporting, plus Playwright's built-in HTML reporter
 
 ## Project structure
 
