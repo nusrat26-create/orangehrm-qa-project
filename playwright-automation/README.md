@@ -60,6 +60,9 @@ Run headed (see the browser) for debugging:
 ```bash
 npm run test:headed
 ```
+screenshots:
+
+![image alt](https://github.com/nusrat26-create/orangehrm-qa-project/blob/3b5bcb039beaff95cdda9fcf54b4fa5f31918425/playwright.jpeg)
 
 ## Reports
 
