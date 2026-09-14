@@ -19,3 +19,5 @@
 Screenshot:
 For login-
 ![image alt](https://github.com/nusrat26-create/orangehrm-qa-project/blob/bbc273b23575367fc95c9f30ecf94938189ff2f7/Screenshot%202026-09-14%20193640.png)
+![image alt](https://github.com/nusrat26-create/orangehrm-qa-project/blob/7f2afa53fbb4bb80bf2e40c85ae8cd3be501d848/Screenshot%202026-09-14%20194023.png)
+![image alt](
