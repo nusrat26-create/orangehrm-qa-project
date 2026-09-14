@@ -64,26 +64,3 @@ screenshots:
 
 ![image alt](https://github.com/nusrat26-create/orangehrm-qa-project/blob/3b5bcb039beaff95cdda9fcf54b4fa5f31918425/playwright.jpeg)
 
-## Reports
-
-An HTML report and Allure results are generated **after every run** (configured in
-`playwright.config.ts`).
-
-- **Playwright HTML report:**
-  ```bash
-  npm run report:html
-  ```
-  Opens `playwright-report/index.html` in the browser.
-
-- **Allure report:** (requires the Allure commandline; easiest via `npx`)
-  ```bash
-  npx allure generate allure-results --clean -o allure-report
-  npx allure open allure-report
-  ```
-
-
-- If `npx playwright install` fails behind a proxy/firewall, see the
-  [Playwright browser install docs](https://playwright.dev/docs/browsers).
-- The OrangeHRM demo instance is a shared public sandbox that Admin resets periodically;
-  if a run fails because expected demo data is missing, re-run — Q2 and Q4 create their
-  own data, and Q3 no longer depends on any pre-seeded data.
