@@ -78,23 +78,6 @@ An HTML report and Allure results are generated **after every run** (configured 
   npx allure open allure-report
   ```
 
-## Notes on test design
-
-- **Independence:** every spec logs in and (where relevant) logs out inside itself, and
-  generates its own random data (`utils/dataGenerator.ts`) so specs never depend on data
-  created by another spec or on execution order.
-- **Q3 data safety:** rather than editing the shared master `Admin` login account (which
-  every other spec depends on to authenticate), Q3 creates its own disposable ESS system
-  user, then searches/edits/verifies that user. This keeps the suite safe to re-run
-  repeatedly against the shared public demo environment.
-- **Selectors:** built against OrangeHRM's stable, well-documented OXD component classes
-  and ARIA roles (`role=link`, `role=button`, `.oxd-*`). If OrangeHRM ships a UI update
-  that changes markup, update the corresponding Page Object only — no test file should
-  need to change.
-- **Retries/artifacts:** `playwright.config.ts` retries a failing test once and captures a
-  trace, screenshot, and video on failure to speed up debugging.
-
-## Troubleshooting
 
 - If `npx playwright install` fails behind a proxy/firewall, see the
   [Playwright browser install docs](https://playwright.dev/docs/browsers).
