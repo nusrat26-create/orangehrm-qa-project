@@ -22,6 +22,8 @@ Every request validates its status code, as required.
 1. Import `JSONPlaceholder-Users-API.postman_collection.json` into Postman.
 2. Click **Run collection**, keep requests in order, run all iterations.
 
+![image alt](https://github.com/nusrat26-create/orangehrm-qa-project/blob/e8d34f202e81b6849e8c8c56a2f1fd576b9d0201/Screenshot%202026-09-14%20201830.png)
+
 ### Option B — Command line via Newman (required deliverable format)
 
 ```bash
