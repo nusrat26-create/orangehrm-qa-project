@@ -23,4 +23,7 @@ For login-
 ![image alt](https://github.com/nusrat26-create/orangehrm-qa-project/blob/3a448d8a73b48ba034395b6ec02d3380b81a92c2/Screenshot%202026-09-14%20194318.png)
 
  For PIM-
- 
+ ![image alt](https://github.com/nusrat26-create/orangehrm-qa-project/blob/d634c3b46f5de2b664d1083241c0a96e06d1aefc/Screenshot%202026-09-14%20195848.png)
+
+For Admin-
+![image alt](
