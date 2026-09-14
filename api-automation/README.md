@@ -44,5 +44,7 @@ newman run JSONPlaceholder-Users-API.postman_collection.json \
 
 This generates an HTML report after every execution, satisfying the general reporting
 requirement alongside the UI suite's Allure/HTML report.
+
 screenshot:
+
 ![image alt](https://github.com/nusrat26-create/orangehrm-qa-project/blob/966337c97a28c5e5bbdb4e4f4f5779fc3116fe56/Screenshot%202026-09-14%20202646.png)
